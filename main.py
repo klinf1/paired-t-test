@@ -8,8 +8,8 @@ def import_data(path):
     data_before = []
     data_after = []
     for item in new_data:
-        data_before.append(item.get('before'))
-        data_after.append(item.get('after'))
+        data_before.append(item.get('ae'))
+        data_after.append(item.get('anae'))
     return data_before, data_after
 
 
@@ -30,9 +30,10 @@ def analyze_data(data_before, data_after):
 
 
 def main():
-    data_before, data_after = import_data('data.xlsx')
+    file = input('Enter the file name. Note that it must be in .xlsx format: ')
+    data_before, data_after = import_data(f'{file}.xlsx')
     result = analyze_data(data_before, data_after)
-    print(round(result.pvalue, 12))
+    print(result)
 
 
 if __name__ == '__main__':
