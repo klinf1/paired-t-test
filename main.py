@@ -18,12 +18,12 @@ def analyze_data(data_before, data_after):
     normal_after = shapiro(data_after)
     if normal_before.pvalue < 0.05:
         raise ValueError(
-            'Data distribution before the experiment is not normal'
+            'Data distribution in the first sample is not normal'
             )
 
     if normal_after.pvalue < 0.05:
         raise ValueError(
-            'Data distribution after the experiment is not normal'
+            'Data distribution in the second sample is not normal'
             )
 
     return (ttest_rel(data_before, data_after))
@@ -33,7 +33,7 @@ def main():
     file = input('Enter the file name. Note that it must be in .xlsx format: ')
     data_before, data_after = import_data(f'{file}.xlsx')
     result = analyze_data(data_before, data_after)
-    print(result)
+    print(result.pvalue)
 
 
 if __name__ == '__main__':
