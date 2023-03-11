@@ -8,8 +8,8 @@ def import_data(path):
     data_before = []
     data_after = []
     for item in new_data:
-        data_before.append(item.get('ae'))
-        data_after.append(item.get('anae'))
+        data_before.append((list(item.values()))[0])
+        data_after.append((list(item.values()))[1])
     return data_before, data_after
 
 
