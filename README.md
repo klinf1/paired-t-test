@@ -12,10 +12,9 @@ For additional info, please read [this.](https://docs.scipy.org/doc/scipy/refere
 ## Usage
 - Clone the code to your system
 - Install requirements
-- Move desired .xlsx file(s) to the directory where main.py is or create a subdirectory for them
+- Move desired file(s) to the directory where main.py is or create a subdirectory for them. Supported formats: xls, xlsx, xlsm, xlsb, odf, ods and odt
 - Execute main.py 
 - Select the test required: for related or independent samples
-- When asked to submit the file path do so without extensions
 - Note that the code only parses columns A and B in the table, make sure to have your data there
 
 ## Results interpretation

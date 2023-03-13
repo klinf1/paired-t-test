@@ -54,10 +54,9 @@ def get_test_type():
 
 def main():
     test_type = get_test_type()
-    file = input(
-        'Enter the file path. Note that the file must be in .xlsx format: '
-    )
-    sample_one, sample_two = import_data(f'{file}.xlsx')
+    file = input('Enter the file path. Supported formats: xls, '
+                 'xlsx, xlsm, xlsb, odf, ods and odt. ')
+    sample_one, sample_two = import_data(f'{file}')
     print(analyze_data(sample_one, sample_two, test_type))
 
 
