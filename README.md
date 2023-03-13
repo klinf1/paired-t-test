@@ -12,10 +12,10 @@ For additional info, please read [this.](https://docs.scipy.org/doc/scipy/refere
 ## Usage
 - Clone the code to your system
 - Install requirements
-- Move desired .xlsx file(s) to the directory where main.py is
+- Move desired .xlsx file(s) to the directory where main.py is or create a subdirectory for them
 - Execute main.py 
 - Select the test required: for related or independent samples
-- When asked to submit the file name do so without extension
+- When asked to submit the file path do so without extensions
 
 ## Results interpretation
 If p-value is less than your chosen p-level (usually 0,05), then the null hypothesis of equal averages should be ***rejected***.

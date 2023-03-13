@@ -31,20 +31,13 @@ def check_normality(a, b):
     return check
 
 
-def analyze_related_data(data_before, data_after):
-    norm = check_normality(data_before, data_after)
-    if norm is True:
-        result = ttest_rel(data_before, data_after)
+def analyze_data(sample_one, sample_two, test_type):
+    norm = check_normality(sample_one, sample_two)
+    if norm is True and test_type == 'yes':
+        result = ttest_ind(sample_one, sample_two)
         to_return = result.pvalue
-    else:
-        to_return = 'Please, check your data.'
-    return to_return
-
-
-def analyze_independent_data(data_before, data_after):
-    norm = check_normality(data_before, data_after)
-    if norm is True:
-        result = ttest_ind(data_before, data_after)
+    elif norm is True and test_type == 'no':
+        result = ttest_rel(sample_one, sample_two)
         to_return = result.pvalue
     else:
         to_return = 'Please, check your data.'
@@ -55,20 +48,17 @@ def get_test_type():
     test_type = input('Are your samples independent? Type yes/no. ')
     if test_type != 'yes' and test_type != 'no':
         print('Please type only "yes" or "no".')
-        get_test_type()
+        test_type = get_test_type()
     return test_type
 
 
 def main():
     test_type = get_test_type()
-    file = input('Enter the file name. Note that it must be in .xlsx format: ')
-    data_before, data_after = import_data(f'{file}.xlsx')
-    if test_type == 'no':
-        result = analyze_related_data(data_before, data_after)
-        print(result)
-    if test_type == 'yes':
-        result = analyze_independent_data(data_before, data_after)
-        print(result)
+    file = input(
+        'Enter the file path. Note that the file must be in .xlsx format: '
+    )
+    sample_one, sample_two = import_data(f'{file}.xlsx')
+    print(analyze_data(sample_one, sample_two, test_type))
 
 
 if __name__ == '__main__':
