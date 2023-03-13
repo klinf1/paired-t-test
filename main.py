@@ -46,7 +46,7 @@ def analyze_data(sample_one, sample_two, test_type):
 
 def get_test_type():
     test_type = input('Are your samples independent? Type yes/no. ')
-    if test_type != 'yes' and test_type != 'no':
+    if test_type.lower() != 'yes' and test_type.lower() != 'no':
         print('Please type only "yes" or "no".')
         test_type = get_test_type()
     return test_type
