@@ -3,7 +3,7 @@ import pandas
 
 
 def import_data(path):
-    data = pandas.read_excel(path)
+    data = pandas.read_excel(path, usecols='A:B')
     new_data = list(data.T.to_dict().values())
     data_before = []
     data_after = []
