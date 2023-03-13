@@ -6,8 +6,8 @@ For additional info, please read [this.](https://docs.scipy.org/doc/scipy/refere
 - This code uses Shapiro-Wilk test to check normality of sample data.
 
 ## Modules used
-- scipy.stats
-- pandas
+- scipy.stats for statistics
+- pandas for file management 
 
 ## Usage
 - Clone the code to your system
@@ -16,6 +16,7 @@ For additional info, please read [this.](https://docs.scipy.org/doc/scipy/refere
 - Execute main.py 
 - Select the test required: for related or independent samples
 - When asked to submit the file path do so without extensions
+- Note that the code only parses columns A and B in the table, make sure to have your data there
 
 ## Results interpretation
 If p-value is less than your chosen p-level (usually 0,05), then the null hypothesis of equal averages should be ***rejected***.
