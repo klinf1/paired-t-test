@@ -1,4 +1,4 @@
-from scipy.stats import shapiro, ttest_rel
+from scipy.stats import shapiro, ttest_rel, ttest_ind
 import pandas
 
 
@@ -13,27 +13,62 @@ def import_data(path):
     return data_before, data_after
 
 
-def analyze_data(data_before, data_after):
-    normal_before = shapiro(data_before)
-    normal_after = shapiro(data_after)
-    if normal_before.pvalue < 0.05:
-        raise ValueError(
+def check_normality(a, b):
+    normal_a = shapiro(a)
+    normal_b = shapiro(b)
+    check = True
+    if normal_a.pvalue < 0.05:
+        print(
             'Data distribution in the first sample is not normal'
             )
+        check = False
 
-    if normal_after.pvalue < 0.05:
-        raise ValueError(
+    if normal_b.pvalue < 0.05:
+        print(
             'Data distribution in the second sample is not normal'
             )
+        check = False
+    return check
 
-    return (ttest_rel(data_before, data_after))
+
+def analyze_related_data(data_before, data_after):
+    norm = check_normality(data_before, data_after)
+    if norm is True:
+        result = ttest_rel(data_before, data_after)
+        to_return = result.pvalue
+    else:
+        to_return = 'Please, check your data.'
+    return to_return
+
+
+def analyze_independent_data(data_before, data_after):
+    norm = check_normality(data_before, data_after)
+    if norm is True:
+        result = ttest_ind(data_before, data_after)
+        to_return = result.pvalue
+    else:
+        to_return = 'Please, check your data.'
+    return to_return
+
+
+def get_test_type():
+    test_type = input('Are your samples independent? Type yes/no. ')
+    if test_type != 'yes' and test_type != 'no':
+        print('Please type only "yes" or "no".')
+        get_test_type()
+    return test_type
 
 
 def main():
+    test_type = get_test_type()
     file = input('Enter the file name. Note that it must be in .xlsx format: ')
     data_before, data_after = import_data(f'{file}.xlsx')
-    result = analyze_data(data_before, data_after)
-    print(result.pvalue)
+    if test_type == 'no':
+        result = analyze_related_data(data_before, data_after)
+        print(result)
+    if test_type == 'yes':
+        result = analyze_independent_data(data_before, data_after)
+        print(result)
 
 
 if __name__ == '__main__':
